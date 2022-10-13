@@ -63,6 +63,10 @@ func (h *handler) showIntegrationPage(w http.ResponseWriter, r *http.Request) {
 		LinkdingEnabled:      integration.LinkdingEnabled,
 		LinkdingURL:          integration.LinkdingURL,
 		LinkdingAPIKey:       integration.LinkdingAPIKey,
+		ShioriEnabled:        integration.ShioriEnabled,
+		ShioriURL:            integration.ShioriURL,
+		ShioriAPIKey:         integration.ShioriAPIKey,
+		ShioriTags:           integration.ShioriTags,
 	}
 
 	sess := session.New(h.store, request.SessionID(r))

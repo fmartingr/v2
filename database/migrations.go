@@ -616,4 +616,13 @@ var migrations = []func(tx *sql.Tx) error{
 		`)
 		return
 	},
+	func(tx *sql.Tx) (err error) {
+		_, err = tx.Exec(`
+			ALTER TABLE integrations ADD COLUMN shiori_enabled bool default 'f';
+			ALTER TABLE integrations ADD COLUMN shiori_url text default '';
+			ALTER TABLE integrations ADD COLUMN shiori_api_key text default '';
+			ALTER TABLE integrations ADD COLUMN shiori_tags text default 'miniflux';
+		`)
+		return err
+	},
 }
