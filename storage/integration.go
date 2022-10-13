@@ -146,7 +146,11 @@ func (s *Storage) Integration(userID int64) (*model.Integration, error) {
 			telegram_bot_chat_id,
 			linkding_enabled,
 			linkding_url,
-			linkding_api_key
+			linkding_api_key,
+			shiori_enabled,
+			shiori_url,
+			shiori_api_key,
+			shiori_tags
 		FROM
 			integrations
 		WHERE
@@ -191,6 +195,10 @@ func (s *Storage) Integration(userID int64) (*model.Integration, error) {
 		&integration.LinkdingEnabled,
 		&integration.LinkdingURL,
 		&integration.LinkdingAPIKey,
+		&integration.ShioriEnabled,
+		&integration.ShioriURL,
+		&integration.ShioriAPIKey,
+		&integration.ShioriTags,
 	)
 	switch {
 	case err == sql.ErrNoRows:
@@ -249,7 +257,11 @@ func (s *Storage) UpdateIntegration(integration *model.Integration) error {
 			espial_tags=$33,
 			linkding_enabled=$34,
 			linkding_url=$35,
-			linkding_api_key=$36
+			linkding_api_key=$36,
+			shiori_enabled=$37,
+			shiori_url=$38,
+			shiori_api_key=$39,
+			shiori_tags=$40
 		WHERE
 			user_id=$37
 	`
@@ -292,6 +304,10 @@ func (s *Storage) UpdateIntegration(integration *model.Integration) error {
 			integration.LinkdingURL,
 			integration.LinkdingAPIKey,
 			integration.UserID,
+			integration.ShioriEnabled,
+			integration.ShioriURL,
+			integration.ShioriAPIKey,
+			integration.ShioriTags,
 		)
 	} else {
 		query := `
@@ -333,7 +349,11 @@ func (s *Storage) UpdateIntegration(integration *model.Integration) error {
 		espial_tags=$33,
 		linkding_enabled=$34,
 		linkding_url=$35,
-		linkding_api_key=$36
+		linkding_api_key=$36,
+		shiori_enabled=$37,
+		shiori_url=$38,
+		shiori_api_key=$39,
+		shiori_tags=$40
 	WHERE
 		user_id=$37
 	`
@@ -376,6 +396,10 @@ func (s *Storage) UpdateIntegration(integration *model.Integration) error {
 			integration.LinkdingURL,
 			integration.LinkdingAPIKey,
 			integration.UserID,
+			integration.ShioriEnabled,
+			integration.ShioriURL,
+			integration.ShioriAPIKey,
+			integration.ShioriTags,
 		)
 	}
 
@@ -396,7 +420,7 @@ func (s *Storage) HasSaveEntry(userID int64) (result bool) {
 		WHERE
 			user_id=$1
 		AND
-			(pinboard_enabled='t' OR instapaper_enabled='t' OR wallabag_enabled='t' OR nunux_keeper_enabled='t' OR espial_enabled='t' OR pocket_enabled='t' OR linkding_enabled='t')
+			(pinboard_enabled='t' OR instapaper_enabled='t' OR wallabag_enabled='t' OR nunux_keeper_enabled='t' OR espial_enabled='t' OR pocket_enabled='t' OR linkding_enabled='t' OR shiori_enabled='t')
 	`
 	if err := s.db.QueryRow(query, userID).Scan(&result); err != nil {
 		result = false

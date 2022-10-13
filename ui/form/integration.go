@@ -48,6 +48,10 @@ type IntegrationForm struct {
 	LinkdingEnabled      bool
 	LinkdingURL          string
 	LinkdingAPIKey       string
+	ShioriEnabled        bool
+	ShioriURL            string
+	ShioriAPIKey         string
+	ShioriTags           string
 }
 
 // Merge copy form values to the model.
@@ -86,6 +90,10 @@ func (i IntegrationForm) Merge(integration *model.Integration) {
 	integration.LinkdingEnabled = i.LinkdingEnabled
 	integration.LinkdingURL = i.LinkdingURL
 	integration.LinkdingAPIKey = i.LinkdingAPIKey
+	integration.ShioriEnabled = i.ShioriEnabled
+	integration.ShioriURL = i.ShioriURL
+	integration.ShioriAPIKey = i.ShioriAPIKey
+	integration.ShioriTags = i.ShioriTags
 }
 
 // NewIntegrationForm returns a new IntegrationForm.
@@ -127,5 +135,9 @@ func NewIntegrationForm(r *http.Request) *IntegrationForm {
 		LinkdingEnabled:      r.FormValue("linkding_enabled") == "1",
 		LinkdingURL:          r.FormValue("linkding_url"),
 		LinkdingAPIKey:       r.FormValue("linkding_api_key"),
+		ShioriEnabled:        r.FormValue("shiori_enabled") == "1",
+		ShioriURL:            r.FormValue("shiori_url"),
+		ShioriAPIKey:         r.FormValue("shiori_api_key"),
+		ShioriTags:           r.FormValue("shiori_tags"),
 	}
 }

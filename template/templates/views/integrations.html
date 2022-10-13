@@ -214,6 +214,25 @@
         </div>
     </div>
 
+    <h3>Shiori</h3>
+    <div class="form-section">
+        <label>
+            <input type="checkbox" name="shiori_enabled" value="1" {{ if .form.ShioriEnabled }}checked{{ end }}> {{ t "form.integration.shiori_activate" }}
+        </label>
+
+        <label for="form-shiori-url">{{ t "form.integration.shiori_url" }}</label>
+        <input type="url" name="shiori_url" id="form-shiori-url" value="{{ .form.ShioriURL }}" placeholder="https://my.shiori" spellcheck="false">
+
+        <label for="form-shiori-api-key">{{ t "form.integration.shiori_api_key" }}</label>
+        <input type="text" name="shiori_api_key" id="form-shiori-api-key" value="{{ .form.ShoriAPIKey }}" spellcheck="false">
+
+        <label for="form-shiori-tags">{{ t "form.integration.shiori_tags" }}</label>
+        <input type="text" name="shiori_tags" id="form-shiori-tags" value="{{ .form.ShioriTags }}" spellcheck="false">
+
+        <div class="buttons">
+            <button type="submit" class="button button-primary" data-label-loading="{{ t "form.submit.saving" }}">{{ t "action.update" }}</button>
+        </div>
+    </div>
 </form>
 
 <h3>{{ t "page.integration.bookmarklet" }}</h3>

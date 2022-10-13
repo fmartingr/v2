@@ -43,4 +43,8 @@ type Integration struct {
 	LinkdingEnabled      bool
 	LinkdingURL          string
 	LinkdingAPIKey       string
+	ShioriEnabled        bool
+	ShioriURL            string
+	ShioriAPIKey         string
+	ShioriTags           string
 }

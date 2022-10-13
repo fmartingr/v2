@@ -108,6 +108,11 @@ func SendEntry(entry *model.Entry, integration *model.Integration) {
 			logger.Error("[Integration] UserID #%d: %v", integration.UserID, err)
 		}
 	}
+
+	if integration.ShioriEnabled {
+		logger.Debug("[Integration] Sending Entry #%d %q for User #%d to Shiori", entry.ID, entry.URL, integration.UserID)
+		// TODO
+	}
 }
 
 // PushEntry pushes an entry to third-party providers during feed refreshes.
